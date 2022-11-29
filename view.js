@@ -1,5 +1,5 @@
-function mainView(){
-    html = `<div>test</div>`
-
-    model.html.appDiv.innerHTML = html;
+function mainView() {
+  selectRandomBackground();
+  let html = '';
+  model.html.appDiv.innerHTML = html;
 }
