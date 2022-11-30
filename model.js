@@ -2,9 +2,12 @@ const model = {
   html: {
     appDiv: document.getElementById("app"),
   },
-  consumables: [
+  loot: [
+    //gjøre om loot til et array med obj, consumables etc som et felt i hvert obj
+
     {
       name: "Waterbottle",
+      category: "consumable",
       IMG: "someimage",
       icon: "someicon",
       id: 01,
@@ -15,6 +18,7 @@ const model = {
     },
     {
       name: "Stale loaf of bread",
+      category: "consumable",
       IMG: "someimage",
       icon: "someicon",
       id: 02,
@@ -25,6 +29,7 @@ const model = {
     },
     {
       name: "Roasted leg of wolf",
+      category: "consumable",
       IMG: "someimage",
       icon: "someicon",
       id: 03,
@@ -35,6 +40,7 @@ const model = {
     },
     {
       name: "Rotten flesh",
+      category: "consumable",
       IMG: "someimage",
       icon: "someicon",
       id: 04,
@@ -44,10 +50,9 @@ const model = {
       description:
         "Rotten meat beyond any kind of recognition. What animal is this from? Are you sure it's animal at all? Only the bravest will dare eat this.",
     },
-  ],
-  Weapons: [
     {
       name: "The Letteropener",
+      category: "weapon",
       IMG: "someimage",
       icon: "someicon",
       id: 11,
@@ -59,6 +64,7 @@ const model = {
     },
     {
       name: "The Smasher",
+      category: "weapon",
       IMG: "someimage",
       icon: "someicon",
       id: 12,
@@ -67,10 +73,9 @@ const model = {
       bonusDamage: 10,
       description: "A common mace. Packs quite a punch, but clumsy to swing",
     },
-  ],
-  Armor: [
     {
       name: "Tiny Tee",
+      category: "armor",
       IMG: "someimage",
       icon: "someicon",
       id: 21,
@@ -81,10 +86,22 @@ const model = {
         "A tiny, torn t-shirt. Better than being naked, but not by much",
     },
   ],
+
   inventory: {
     isOpen: false,
     contents: [],
   },
-  backgrounds:['IMG/Backgrounds/Background1.jpg','IMG/Backgrounds/Background2.jpg','IMG/Backgrounds/Background3.jpg','IMG/Backgrounds/Background4.jpg','IMG/Backgrounds/Background5.jpg','IMG/Backgrounds/Background6.jpg','IMG/Backgrounds/Background7.jpg','IMG/Backgrounds/Background8.jpg'],
-  currentBackground:'',
-};
+  backgrounds: [
+    "IMG/Backgrounds/Background1.jpg",
+    "IMG/Backgrounds/Background2.jpg",
+    "IMG/Backgrounds/Background3.jpg",
+    "IMG/Backgrounds/Background4.jpg",
+    "IMG/Backgrounds/Background5.jpg",
+    "IMG/Backgrounds/Background6.jpg",
+    "IMG/Backgrounds/Background7.jpg",
+    "IMG/Backgrounds/Background8.jpg",
+  ],
+  currentBackground: "",
+  itemTypes: ["consumables", "weapons", "armor"],
+  items: {},
+}  
