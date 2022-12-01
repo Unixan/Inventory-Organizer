@@ -102,6 +102,5 @@ const model = {
     "IMG/Backgrounds/Background8.jpg",
   ],
   currentBackground: "",
-  itemTypes: ["consumables", "weapons", "armor"],
   itemsByQuality: {},
-}  
+};
