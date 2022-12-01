@@ -88,7 +88,7 @@ const model = {
   ],
 
   inventory: {
-    isOpen: true,
+    isOpen: false,
     contents: [],
   },
   backgrounds: [
