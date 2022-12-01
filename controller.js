@@ -10,8 +10,30 @@ function selectRandomBackground() {
 
 function createQualityObjectLists() {
   for (let item of model.loot) {
-    let array = model.items[item.quality];
-    if (!array) array = model.items[item.quality] = [];
+    let array = model.itemsByQuality[item.quality];
+    if (!array) array = model.itemsByQuality[item.quality] = [];
     array.push(item);
   }
+}
+
+function inventory() {
+  let inventoryBoxes = generateInventorySlots();
+  let inventoryScreen = /*HTML*/ `
+  <div class="inventoryBox">${inventoryBoxes}</div>
+  `;
+  return inventoryScreen;
+}
+
+function generateInventorySlots() {
+  let inventorySlots = "";
+  for (x = 0; x < 50; x++) {
+    itemIcon = "";
+    if (model.inventory.contents[x] == undefined) {
+      itemIcon = "";
+    } else {
+      itemIcon = model.inventory.contents[x].icon;
+    }
+    inventorySlots += `<div class="inventorySlot" id="${x}">${itemIcon}</div>`;
+  }
+  return inventorySlots;
 }

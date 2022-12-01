@@ -88,7 +88,7 @@ const model = {
   ],
 
   inventory: {
-    isOpen: false,
+    isOpen: true,
     contents: [],
   },
   backgrounds: [
@@ -103,5 +103,5 @@ const model = {
   ],
   currentBackground: "",
   itemTypes: ["consumables", "weapons", "armor"],
-  items: {},
+  itemsByQuality: {},
 }  
