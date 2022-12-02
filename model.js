@@ -12,6 +12,7 @@ const model = {
       icon: "someicon",
       id: 01,
       quality: "common",
+      color: "white",
       value: 20,
       HP: 20,
       description: "A cool, clear bottle of water.",
@@ -23,6 +24,7 @@ const model = {
       icon: "someicon",
       id: 02,
       quality: "common",
+      color: "white",
       value: 30,
       HP: 10,
       description: "Not very apetizing, but atleast its edable.",
@@ -34,6 +36,7 @@ const model = {
       icon: "someicon",
       id: 03,
       quality: "uncommon",
+      color: "green",
       value: 60,
       HP: 50,
       description: "A fitting meal for a ruthless warrior.",
@@ -45,6 +48,7 @@ const model = {
       icon: "IMG/Icons/rotten meat.jpg",
       id: 04,
       quality: "poor",
+      color: "grey",
       value: 0,
       hp: -10,
       description:
@@ -57,6 +61,7 @@ const model = {
       icon: "IMG/Icons/Sword.png",
       id: 11,
       quality: "poor",
+      color: "grey",
       value: 10,
       bonusDamage: 6,
       description:
@@ -69,6 +74,7 @@ const model = {
       icon: "someicon",
       id: 12,
       quality: "common",
+      color: "white",
       value: 20,
       bonusDamage: 10,
       description: "A common mace. Packs quite a punch, but clumsy to swing",
@@ -80,6 +86,7 @@ const model = {
       icon: "someicon",
       id: 21,
       quality: "poor",
+      color: "gray",
       value: 5,
       bonusArmor: 1,
       description:
@@ -97,6 +104,7 @@ const model = {
         icon: "IMG/Icons/dagger.jpg",
         id: 11,
         quality: "poor",
+        color: 'gray',
         value: 10,
         bonusDamage: 6,
         description:
@@ -109,6 +117,7 @@ const model = {
         icon: "IMG/Icons/rotten meat.jpg",
         id: 04,
         quality: "poor",
+        color: "gray",
         value: 0,
         hp: -10,
         description:
@@ -128,5 +137,5 @@ const model = {
   ],
   currentBackground: "",
   itemsByQuality: {},
-  mouseOverItem: '',
+  itemTooltip: "",
 };

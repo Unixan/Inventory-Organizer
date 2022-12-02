@@ -30,7 +30,7 @@ function generateInventorySlots() {
     let inventoryItem = "";
     if (model.inventory.contents[x] !== undefined) {
       inventoryItem = model.inventory.contents[x].icon;
-      inventorySlots += `<div class="inventorySlot"><img src="${inventoryItem}" id="${x}" class="icon" onmouseover="displayItemInfo(this.id)" onmouseleave="clearMouseoverItem()"/></div>`;
+      inventorySlots += `<div class="inventorySlot"><img src="${inventoryItem}" id="${x}" class="icon" onclick="displayItemInfo(this.id)" /></div>`;
     } else {
       inventorySlots += `<div class="inventorySlot"></div>`;
     }
@@ -43,15 +43,18 @@ function openInventory() {
 }
 
 function displayItemInfo(index) {
-  model.mouseOverItem = model.inventory.contents[index];
-  console.log(model.mouseOverItem);
-  return /*HTML*/ `
-  <p>Name: ${model.mouseOverItem}</p>
-  `;
-}
-
-function clearMouseoverItem() {
-  model.mouseOverItem = "";
-  console.log(model.mouseOverItem);
+  model.itemTooltip = "";
+  itemIndex = parseInt(index);
+  let item = model.inventory.contents[itemIndex];
+  let itemColor = item.color;
+  model.itemTooltip = `
+  <div class="itemInfo" style="border: solid ${itemColor} 4px">
+    <div>Name: ${item.name}</div>
+    <div>Quality: ${item.quality}</div>
+    <div>Value: ${item.value}</div>
+    <div>Description: "${item.description}"</div>
+  </div>
+    `;
+  console.log(model.itemTooltip);
   mainView();
 }

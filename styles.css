@@ -10,16 +10,17 @@
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: auto 150px 480px 150px auto;
+  grid-template-columns: 20% 5% 50% 12.5% 12.5%;
   grid-template-rows: 100px 80px auto 242px;
   grid-template-areas:
     "topleft topcenter topcenter topcenter topright"
     "centerleft center center center centerright"
     "middleleft middle middle middle middleright"
-    "bottomleft bottomleft bottomcenter bottomright bottomright";
+    "bottomfarleft bottomleft bottomcenter bottomright bottomright";
 }
 
 .inventoryBox {
+  justify-self: center;
   background-color: darkgrey;
   display: grid;
   grid-template-columns: repeat(10, 40px);
@@ -44,7 +45,6 @@
   padding: 0px;
   border-radius: 10%;
 }
-
 
 .mainInfo {
   grid-area: center;
@@ -96,43 +96,22 @@
   box-shadow: none;
 }
 
-.icon{
+.icon {
   height: 40px;
   width: 40px;
 }
 
-.icon:hover{
+.icon:hover {
   border: solid green 2px;
 }
 
-.icon:active{
+.icon:active {
   border: none;
 }
-
-.tooltip-container {
-  position: relative;
-  display: flex;
-  place-content: center;
+.itemInfo {
+  size: inherit;
+  grid-area: bottomfarleft;
+  background-color: aliceblue;
+  padding: 4px;
+  margin: 10px;
 }
-
-/* styling of the tooltip display */
-p#tooltip-text {
-  display: none;
-  position: absolute;
-  top: -60px;
-  z-index: 1;
-  background: #00732c;
-  padding: 8px;
-  font-size: 1rem;
-  color: #fff;
-  border-radius: 2px;
-  animation: fadeIn 0.6s;
-}
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
- }
