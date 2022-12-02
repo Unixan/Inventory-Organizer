@@ -42,7 +42,7 @@ const model = {
       name: "Rotten flesh",
       category: "consumable",
       IMG: "someimage",
-      icon: "someicon",
+      icon: "IMG/Icons/rotten meat.jpg",
       id: 04,
       quality: "poor",
       value: 0,
@@ -54,7 +54,7 @@ const model = {
       name: "The Letteropener",
       category: "weapon",
       IMG: "someimage",
-      icon: "someicon",
+      icon: "IMG/Icons/Sword.png",
       id: 11,
       quality: "poor",
       value: 10,
@@ -89,7 +89,32 @@ const model = {
 
   inventory: {
     isOpen: false,
-    contents: [],
+    contents: [
+      {
+        name: "The Letteropener",
+        category: "weapon",
+        IMG: "someimage",
+        icon: "IMG/Icons/dagger.jpg",
+        id: 11,
+        quality: "poor",
+        value: 10,
+        bonusDamage: 6,
+        description:
+          "Better than bare hands... Maybe..... Hey at least its sharp... ish...",
+      },
+      {
+        name: "Rotten flesh",
+        category: "consumable",
+        IMG: "someimage",
+        icon: "IMG/Icons/rotten meat.jpg",
+        id: 04,
+        quality: "poor",
+        value: 0,
+        hp: -10,
+        description:
+          "Rotten meat beyond any kind of recognition. What animal is this from? Are you sure it's animal at all? Only the bravest will dare eat this.",
+      },
+    ],
   },
   backgrounds: [
     "IMG/Backgrounds/Background1.jpg",
@@ -103,4 +128,5 @@ const model = {
   ],
   currentBackground: "",
   itemsByQuality: {},
+  mouseOverItem: '',
 };

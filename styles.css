@@ -10,7 +10,7 @@
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: auto 100px 480px 100px auto;
+  grid-template-columns: auto 150px 480px 150px auto;
   grid-template-rows: 100px 80px auto 242px;
   grid-template-areas:
     "topleft topcenter topcenter topcenter topright"
@@ -45,6 +45,7 @@
   border-radius: 10%;
 }
 
+
 .mainInfo {
   grid-area: center;
   text-align: center;
@@ -78,12 +79,12 @@
   text-transform: none;
   background-image: linear-gradient(
     to right,
-    rgb(28, 110, 164) 0%,
-    rgb(35, 136, 203) 50%,
-    rgb(20, 78, 117) 100%
+    rgb(88, 88, 88) 0%,
+    rgb(181, 181, 181) 50%,
+    rgb(89, 89, 89) 100%
   );
   box-shadow: rgb(0, 0, 0) 5px 5px 15px 5px;
-  border: 2px solid rgb(28, 110, 164);
+  border: 2px solid rgb(0, 0, 0);
   display: inline-block;
   grid-area: bottomright;
 }
@@ -92,4 +93,46 @@
 }
 .inventoryButton:active {
   background: #144e75;
+  box-shadow: none;
 }
+
+.icon{
+  height: 40px;
+  width: 40px;
+}
+
+.icon:hover{
+  border: solid green 2px;
+}
+
+.icon:active{
+  border: none;
+}
+
+.tooltip-container {
+  position: relative;
+  display: flex;
+  place-content: center;
+}
+
+/* styling of the tooltip display */
+p#tooltip-text {
+  display: none;
+  position: absolute;
+  top: -60px;
+  z-index: 1;
+  background: #00732c;
+  padding: 8px;
+  font-size: 1rem;
+  color: #fff;
+  border-radius: 2px;
+  animation: fadeIn 0.6s;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+ }
