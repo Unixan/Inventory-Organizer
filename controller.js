@@ -48,13 +48,18 @@ function displayItemInfo(index) {
   let item = model.inventory.contents[itemIndex];
   let itemColor = item.color;
   model.itemTooltip = `
-  <div class="itemInfo" style="border: solid ${itemColor} 4px">
-    <div>Name: ${item.name}</div>
-    <div>Quality: ${item.quality}</div>
-    <div>Value: ${item.value}</div>
+  <div class="itemInfo" style="border: solid ${itemColor} 4px" onclick="clearAndUpdate()">
+    <div>"${item.name}"</div><br>
+    <div>Quality: ${item.quality}</div><br>
+    <div>Value: ${item.value}</div><br>
     <div>Description: "${item.description}"</div>
   </div>
     `;
-  console.log(model.itemTooltip);
+
+  mainView();
+}
+
+function clearAndUpdate() {
+  model.itemTooltip = "";
   mainView();
 }

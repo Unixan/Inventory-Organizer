@@ -10,7 +10,7 @@ function mainView() {
   <button class="inventoryButton" onclick="openInventory()">${buttonText}</button>
   
   `;
-  if (model.inventory.isOpen === false) {
+  if (model.inventory.isOpen === true) {
     html += inventory();
     html += model.itemTooltip
   }
