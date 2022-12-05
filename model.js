@@ -14,7 +14,7 @@ const model = {
       quality: "common",
       color: "white",
       value: 20,
-      HP: 20,
+      HealthPoints: 20,
       description: "A cool, clear bottle of water.",
     },
     {
@@ -26,7 +26,7 @@ const model = {
       quality: "common",
       color: "white",
       value: 30,
-      HP: 10,
+      HealthPoints: 10,
       description: "Not very apetizing, but atleast its edable.",
     },
     {
@@ -38,7 +38,7 @@ const model = {
       quality: "uncommon",
       color: "green",
       value: 60,
-      HP: 50,
+      HealthPoints: 50,
       description: "A fitting meal for a ruthless warrior.",
     },
     {
@@ -50,7 +50,7 @@ const model = {
       quality: "poor",
       color: "grey",
       value: 0,
-      hp: -10,
+      HealthPoints: -10,
       description:
         "Rotten meat beyond any kind of recognition. What animal is this from? Are you sure it's animal at all? Only the bravest will dare eat this.",
     },
@@ -104,7 +104,7 @@ const model = {
         icon: "IMG/Icons/dagger.jpg",
         id: 11,
         quality: "poor",
-        color: 'gray',
+        color: "gray",
         value: 10,
         bonusDamage: 6,
         description:
@@ -119,7 +119,7 @@ const model = {
         quality: "poor",
         color: "gray",
         value: 0,
-        hp: -10,
+        HealthPoints: -10,
         description:
           "Rotten meat beyond any kind of recognition. What animal is this from? Are you sure it's animal at all? Only the bravest will dare eat this.",
       },
@@ -138,4 +138,7 @@ const model = {
   currentBackground: "",
   itemsByQuality: {},
   itemTooltip: "",
+  actionBox: "",
+  health: 100,
+  wallet: 0,
 };

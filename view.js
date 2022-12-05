@@ -7,13 +7,19 @@ function mainView() {
   let html = "";
   html += /*HTML*/ `
   <p class="mainInfo">You look around you and discover that there recently was a battle here. Dead bodies of animals and humans lie around you. You search the bodies and discover:</p>
-  <button class="inventoryButton" onclick="openInventory()">${buttonText}</button>
+  
+    <button class="inventoryButton" onclick="openInventory()">${buttonText}</button>
   
   `;
-  if (model.inventory.isOpen === true) {
+  if (model.inventory.isOpen === false) {
     html += inventory();
-    html += model.itemTooltip
-  }
 
+  } else {
+    model.itemTooltip = "";
+  }
+  html += model.itemTooltip;
+  html += model.actionBox;
+  html += generateHealthBox();
+  html += generateCoins();
   model.html.appDiv.innerHTML = html;
 }

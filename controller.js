@@ -1,5 +1,5 @@
 function selectRandomBackground() {
-  let newBackground = model.backgrounds[Math.floor(Math.random() * 8)];
+  let newBackground = model.backgrounds[Math.floor(Math.random() * 7)];
   if (newBackground === model.currentBackground) {
     selectRandomBackground();
   } else {
@@ -46,14 +46,34 @@ function displayItemInfo(index) {
   model.itemTooltip = "";
   itemIndex = parseInt(index);
   let item = model.inventory.contents[itemIndex];
+  let damage = "";
+  let hitPoints = "";
   let itemColor = item.color;
-  model.itemTooltip = `
-  <div class="itemInfo" style="border: solid ${itemColor} 4px" onclick="clearAndUpdate()">
+  let consume = "";
+  if (item.bonusDamage != undefined) {
+    damage = `<div>Bonus Damage: ` + item.bonusDamage + `</div><br>`;
+  } else if (item.HealthPoints != undefined) {
+    hitPoints = `<div>Health: ` + item.HealthPoints + `</div><br>`;
+  }
+  if (item.category === "consumable") {
+    consume = `<button onclick="consumeItem(${itemIndex})">Consume</button><div>(For ${item.HealthPoints} health)</div>`;
+  }
+
+  model.itemTooltip =
+    `
+  <div class="itemInfo" style="border: solid ${itemColor} 4px"><img src="IMG/Buttons/close-button.png" class="xButton" onclick="clearAndUpdate()"/>
     <div>"${item.name}"</div><br>
-    <div>Quality: ${item.quality}</div><br>
-    <div>Value: ${item.value}</div><br>
-    <div>Description: "${item.description}"</div>
+    <div>Quality: ${item.quality}</div>
+    <div>Value: ${item.value}</div>` +
+    damage +
+    hitPoints +
+    `<div>Description: "${item.description}"</div>
   </div>
+  <div class="actionBox itemInfo" style="text-align: center;">Actions:
+    <button onclick="discardItem(${itemIndex})">Discard</button>
+    <button>Sell for ${item.value} credits</button><br>` +
+    consume +
+    `</div>
     `;
 
   mainView();
@@ -62,4 +82,38 @@ function displayItemInfo(index) {
 function clearAndUpdate() {
   model.itemTooltip = "";
   mainView();
+}
+
+function discardItem(inventoryIndex) {
+  model.inventory.contents.splice(inventoryIndex, 1);
+  model.itemTooltip = "";
+  mainView();
+}
+
+function consumeItem(inventoryIndex) {
+  model.health =
+    model.health + model.inventory.contents[inventoryIndex].HealthPoints;
+  if (model.health > 100) {
+    model.health = 100;
+  }
+  model.inventory.contents.splice(inventoryIndex, 1);
+  model.itemTooltip = "";
+  mainView();
+}
+
+function generateHealthBox() {
+  return `
+  <div class="cornerBox healthBox">
+    <div>Health</div>
+    <meter class="healthMeter" id="health" min="0" low="25" optimum="100" high="55" max="100" value="${model.health}"></meter>
+    <div>${model.health} / 100 HP</div
+  </div>`;
+}
+function generateCoins(){
+  return `
+  <div class="cornerBox coinBox">
+    <div>Coins:</div>
+    <div>${model.wallet}</div>
+  </div>
+  `
 }
