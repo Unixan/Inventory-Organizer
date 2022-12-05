@@ -121,5 +121,6 @@ function generateCoins() {
 function sellItem(inventoryIndex) {
   model.wallet = model.wallet + model.inventory.contents[inventoryIndex].value;
   model.inventory.contents.splice(inventoryIndex, 1);
+  model.itemTooltip = "";
   mainView();
 }
