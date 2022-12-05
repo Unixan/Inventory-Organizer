@@ -71,7 +71,7 @@ function displayItemInfo(index) {
   </div>
   <div class="actionBox itemInfo" style="text-align: center;">Actions:
     <button onclick="discardItem(${itemIndex})">Discard</button>
-    <button>Sell for ${item.value} credits</button><br>` +
+    <button onclick="sellItem(${itemIndex})">Sell for ${item.value} credits</button><br>` +
     consume +
     `</div>
     `;
@@ -106,14 +106,20 @@ function generateHealthBox() {
   <div class="cornerBox healthBox">
     <div>Health</div>
     <meter class="healthMeter" id="health" min="0" low="25" optimum="100" high="55" max="100" value="${model.health}"></meter>
-    <div>${model.health} / 100 HP</div
+    <div>${model.health} / 100 HP</div>
   </div>`;
 }
-function generateCoins(){
+function generateCoins() {
   return `
   <div class="cornerBox coinBox">
     <div>Coins:</div>
-    <div>${model.wallet}</div>
+    <div style="font-size: 22px; color: lightgreen">${model.wallet}</div>
   </div>
-  `
+  `;
+}
+
+function sellItem(inventoryIndex) {
+  model.wallet = model.wallet + model.inventory.contents[inventoryIndex].value;
+  model.inventory.contents.splice(inventoryIndex, 1);
+  mainView();
 }
