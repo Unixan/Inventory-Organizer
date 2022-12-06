@@ -124,3 +124,19 @@ function sellItem(inventoryIndex) {
   model.itemTooltip = "";
   mainView();
 }
+
+function walkOn() {
+  selectRandomBackground();
+  model.health = model.health - 5;
+  mainView();
+}
+
+function restart() {
+  model.wallet = 0;
+  model.inventory.contents = [];
+  model.health = 100;
+  model.currentBackground = "";
+  mainView();
+}
+
+// Bare logikk for å få frem random ting man finner igjen å lage.
