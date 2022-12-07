@@ -31,7 +31,7 @@ function mainView() {
     model.html.appDiv.innerHTML = html;
   } else if (model.health <= 0) {
     html = /*HTML*/ `
-    <p class="mainInfo" style="font-size: x-large">You died!</p>
+    <p class="youDied" style="font-size: x-large">You died!</p>
     <button class="buttons walkOn" onclick="restart()">Restart</button>
     `;
     document.body.style.backgroundImage = "url(IMG/Backgrounds/1052.jpg)";
