@@ -48,14 +48,17 @@ function displayItemInfo(index) {
   let item = model.inventory.contents[itemIndex];
   let damage = "";
   let hitPoints = "";
+  let armor = "";
   let itemColor = item.color;
   let consume = "";
   if (item.bonusDamage != undefined) {
     damage = `<div>Bonus Damage: ` + item.bonusDamage + `</div><br>`;
   } else if (item.HealthPoints != undefined) {
     hitPoints = `<div>Health: ` + item.HealthPoints + `</div><br>`;
+  } else if (item.bonusArmor != undefined) {
+    armor = `<div>Bonus Armor: ` + item.bonusArmor + `</div><br>`;
   }
-  if (item.category === "consumable") {
+  if (item.category === "Consumable") {
     consume = `<button onclick="consumeItem(${itemIndex})">Consume</button><div>(For ${item.HealthPoints} health)</div>`;
   }
 
@@ -67,6 +70,7 @@ function displayItemInfo(index) {
     <div>Value: ${item.value}</div>` +
     damage +
     hitPoints +
+    armor +
     `<div>Description: "${item.description}"</div>
   </div>
   <div class="actionBox itemInfo" style="text-align: center;">Actions:
@@ -96,6 +100,7 @@ function consumeItem(inventoryIndex) {
   if (model.health > 100) {
     model.health = 100;
   }
+
   model.inventory.contents.splice(inventoryIndex, 1);
   model.itemTooltip = "";
   mainView();
@@ -128,6 +133,8 @@ function sellItem(inventoryIndex) {
 function walkOn() {
   selectRandomBackground();
   model.health = model.health - 5;
+  model.lootQueryDisplay = "";
+  generateLoot();
   mainView();
 }
 
@@ -139,4 +146,96 @@ function restart() {
   mainView();
 }
 
+function generateLoot() {
+  model.currentLoot = [];
+ 
+  
+  randomLootNumber = Math.floor(Math.random() * 5) + 3;
+  for (i = 0; i < randomLootNumber; i++) {
+    randomNumber = Math.floor(Math.random() * 100) + 1;
+    if (randomNumber < 31) {
+      model.currentLoot.push(
+        model.itemsByQuality.Poor[
+          Math.floor(Math.random() * model.itemsByQuality.Poor.length)
+        ]
+      );
+    } else if (randomNumber < 51) {
+      model.currentLoot.push(
+        model.itemsByQuality.Common[
+          Math.floor(Math.random() * model.itemsByQuality.Common.length)
+        ]
+      );
+    } else if (randomNumber < 71) {
+      model.currentLoot.push(
+        model.itemsByQuality.Uncommon[
+          Math.floor(Math.random() * model.itemsByQuality.Uncommon.length)
+        ]
+      );
+    } else if (randomNumber < 91) {
+      model.currentLoot.push(
+        model.itemsByQuality.Rare[
+          Math.floor(Math.random() * model.itemsByQuality.Rare.length)
+        ]
+      );
+    } else if (randomNumber <= 100) {
+      model.currentLoot.push(
+        model.itemsByQuality.Epic[
+          Math.floor(Math.random() * model.itemsByQuality.Epic.length)
+        ]
+      );
+    }
+  }
+  createLootDisplay();
+}
+function createLootDisplay() {
+  model.lootDisplay = "";
+  loot = "";
+  for (index in model.currentLoot) {
+    currentItem = model.currentLoot[index];
+    loot += `
+    <div class="lootItem" style="border: solid ${currentItem.color} 3px" onclick="pickupItem(${index})"><div>"${currentItem.name}"</div>
+      <img src="${currentItem.IMG}" class="img"/>    
+    </div>
+      `;
+  }
+  model.lootDisplay = `<div class="lootBox">${loot}</div>`;
+}
+console.log(model.lootDisplay);
+function pickupItem(index) {
+  model.lootQueryDisplay = "";
+  lootItem = model.currentLoot[index];
+  lootItemHP = "";
+  lootItemArmor = "";
+  lootItemDamage = "";
+  if (lootItem.bonusDamage != undefined) {
+    lootItemDamage =
+      `<div>Bonus Damage: ` + lootItem.bonusDamage + `</div><br>`;
+  } else if (lootItem.HealthPoints != undefined) {
+    lootItemHP = `<div>Health: ` + lootItem.HealthPoints + `</div><br>`;
+  } else if (lootItem.bonusArmor != undefined) {
+    lootItemArmor = `<div>Bonus Armor: ` + lootItem.bonusArmor + `</div><br>`;
+  }
+  model.lootQueryDisplay = `
+<div class="lootQuery" style="border: solid ${lootItem.color} 4px">
+<div style="text-align: center; font-size: x-large">"${lootItem.name}"</div><br>
+<div>${lootItem.quality}</div><br>
+<div>Type: ${lootItem.category}</div><br>
+<div>Value: ${lootItem.value}</div><br>
+${lootItemHP}${lootItemArmor}${lootItemDamage}
+<div>Description:<br><br> "${lootItem.description}"</div><br>
+<button onclick="pickUpLoot(${index})">Pick up</button>
+<button onclick="discardLoot(${index})">Discard</button>
+</div>  
+`;
+  console.log(index);
+  mainView();
+}
+
+function pickUpLoot(index) {
+  model.inventory.contents.push(model.currentLoot[index]);
+  model.currentLoot.splice(index, 1);
+  createLootDisplay();
+  model.lootQueryDisplay= '';
+  mainView();
+}
 // Bare logikk for å få frem random ting man finner igjen å lage.

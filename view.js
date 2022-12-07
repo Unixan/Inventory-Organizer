@@ -4,11 +4,13 @@ function mainView() {
     if (model.currentBackground === "") {
       selectRandomBackground();
       createQualityObjectLists();
+      generateLoot();
     }
     let html = "";
     html += /*HTML*/ `
-  <p class="mainInfo">You look around you and discover that there recently was a battle here. Dead bodies of animals and humans lie around you. You search the bodies and discover:</p>
-   
+  <div class="mainInfo">
+    You look around you and discover that there recently was a battle here. Dead bodies of animals and humans lie around you.<br> You search the bodies and discover:
+   </div>
     <button class="buttons walkOn" onclick="walkOn()">Walk on</button>
     <button class="inventory buttons" onclick="openInventory()">${buttonText}</button>
   
@@ -19,6 +21,9 @@ function mainView() {
     } else {
       model.itemTooltip = "";
     }
+
+    html += model.lootDisplay;
+    html += model.lootQueryDisplay;
     html += model.itemTooltip;
     html += model.actionBox;
     html += generateHealthBox();
