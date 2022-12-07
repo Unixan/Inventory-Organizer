@@ -63,7 +63,7 @@
   font-variant: small-caps;
   padding: 8px;
   box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.7);
-  margin-top: 20px;
+  margin-top: 10px;
   border: solid grey 4px;
 }
 
@@ -142,13 +142,9 @@
 .xButton {
   display: flex;
   height: 15px;
+  width: 15px;
+  align-self: flex-end;
   float: right;
-}
-.xButton:hover {
-  border: solid red 2px;
-}
-.xButton:active {
-  border: none;
 }
 
 .actionBox {
@@ -218,21 +214,21 @@
 }
 
 .lootQuery {
+  max-width: 400px;
   display: flex;
   grid-area: lowermiddle;
   flex-direction: column;
   align-self: flex-end;
   justify-self: center;
   background-color: #1c6ea4;
-  border-radius: 10%;
+  border-radius: 5%;
   padding: 8px;
   color: white;
-  
   margin: 10px;
 }
 
-.img{
-  width: 100px;
+.img {
+  max-width: 100px;
   height: 100px;
   justify-self: center;
 }

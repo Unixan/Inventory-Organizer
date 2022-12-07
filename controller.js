@@ -29,6 +29,7 @@ function generateInventorySlots() {
   for (x = 0; x < 50; x++) {
     let inventoryItem = "";
     if (model.inventory.contents[x] !== undefined) {
+      borderColor = model.inventory.contents[x].color
       inventoryItem = model.inventory.contents[x].icon;
       inventorySlots += `<div class="inventorySlot"><img src="${inventoryItem}" id="${x}" class="icon" onclick="displayItemInfo(this.id)" /></div>`;
     } else {
@@ -37,6 +38,7 @@ function generateInventorySlots() {
   }
   return inventorySlots;
 }
+
 function openInventory() {
   model.inventory.isOpen = !model.inventory.isOpen;
   mainView();
@@ -44,6 +46,7 @@ function openInventory() {
 
 function displayItemInfo(index) {
   model.itemTooltip = "";
+  model.lootQueryDisplay = "";
   itemIndex = parseInt(index);
   let item = model.inventory.contents[itemIndex];
   let damage = "";
@@ -61,7 +64,6 @@ function displayItemInfo(index) {
   if (item.category === "Consumable") {
     consume = `<button onclick="consumeItem(${itemIndex})">Consume</button><div>(For ${item.HealthPoints} health)</div>`;
   }
-
   model.itemTooltip =
     `
   <div class="itemInfo" style="border: solid ${itemColor} 4px"><img src="IMG/Buttons/close-button.png" class="xButton" onclick="clearAndUpdate()"/>
@@ -77,9 +79,7 @@ function displayItemInfo(index) {
     <button onclick="discardItem(${itemIndex})">Discard</button>
     <button onclick="sellItem(${itemIndex})">Sell for ${item.value} credits</button><br>` +
     consume +
-    `</div>
-    `;
-
+    `</div>`;
   mainView();
 }
 
@@ -114,6 +114,7 @@ function generateHealthBox() {
     <div>${model.health} / 100 HP</div>
   </div>`;
 }
+
 function generateCoins() {
   return `
   <div class="cornerBox coinBox">
@@ -148,8 +149,6 @@ function restart() {
 
 function generateLoot() {
   model.currentLoot = [];
- 
-  
   randomLootNumber = Math.floor(Math.random() * 5) + 3;
   for (i = 0; i < randomLootNumber; i++) {
     randomNumber = Math.floor(Math.random() * 100) + 1;
@@ -187,6 +186,7 @@ function generateLoot() {
   }
   createLootDisplay();
 }
+
 function createLootDisplay() {
   model.lootDisplay = "";
   loot = "";
@@ -200,8 +200,9 @@ function createLootDisplay() {
   }
   model.lootDisplay = `<div class="lootBox">${loot}</div>`;
 }
-console.log(model.lootDisplay);
+
 function pickupItem(index) {
+  model.itemTooltip = "";
   model.lootQueryDisplay = "";
   lootItem = model.currentLoot[index];
   lootItemHP = "";
@@ -217,17 +218,17 @@ function pickupItem(index) {
   }
   model.lootQueryDisplay = `
 <div class="lootQuery" style="border: solid ${lootItem.color} 4px">
+<img src="IMG/Buttons/close-button.png" class="xButton" onclick="clearAndUpdateLootQuery()"/>  
 <div style="text-align: center; font-size: x-large">"${lootItem.name}"</div><br>
-<div>${lootItem.quality}</div><br>
-<div>Type: ${lootItem.category}</div><br>
-<div>Value: ${lootItem.value}</div><br>
-${lootItemHP}${lootItemArmor}${lootItemDamage}
-<div>Description:<br><br> "${lootItem.description}"</div><br>
-<button onclick="pickUpLoot(${index})">Pick up</button>
-<button onclick="discardLoot(${index})">Discard</button>
-</div>  
+  <div>${lootItem.quality}</div><br>
+  <div>Type: ${lootItem.category}</div><br>
+  <div>Value: ${lootItem.value}</div><br>
+  ${lootItemHP}${lootItemArmor}${lootItemDamage}
+  <div>Description:<br><br> "${lootItem.description}"</div><br>
+  <button onclick="pickUpLoot(${index})">Pick up</button>
+  <button onclick="discardLoot(${index})">Discard</button>
+</div><br>  
 `;
-  console.log(index);
   mainView();
 }
 
@@ -235,7 +236,18 @@ function pickUpLoot(index) {
   model.inventory.contents.push(model.currentLoot[index]);
   model.currentLoot.splice(index, 1);
   createLootDisplay();
-  model.lootQueryDisplay= '';
+  model.lootQueryDisplay = "";
   mainView();
 }
-// Bare logikk for å få frem random ting man finner igjen å lage.
+
+function discardLoot(index) {
+  model.currentLoot.splice(index, 1);
+  createLootDisplay();
+  model.lootQueryDisplay = "";
+  mainView();
+}
+
+function clearAndUpdateLootQuery() {
+  model.lootQueryDisplay = "";
+  mainView();
+}
